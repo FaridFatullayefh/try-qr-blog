@@ -1,0 +1,19 @@
+backend:
+  name: github
+  repo: FaridFatullayefh/try-qr-blog
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "blog"
+    label: "Məqalələr"
+    folder: "posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Başlıq", name: "title", widget: "string"}
+      - {label: "Tarix", name: "date", widget: "datetime"}
+      - {label: "Qısa Təsvir", name: "description", widget: "text"}
+      - {label: "Məzmun", name: "body", widget: "markdown"}
