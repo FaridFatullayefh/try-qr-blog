@@ -1,1 +1,71 @@
-coming
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Try-QR Blog | Texnologiya və Mühəndislik</title>
+    <style>
+        :root { --primary: #2563eb; --dark: #1e293b; --bg: #f8fafc; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; color: var(--dark); }
+        header { background: white; padding: 2rem; text-align: center; border-bottom: 1px solid #e2e8f0; }
+        .container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        #posts-list { display: grid; gap: 1.5rem; }
+        .post-card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); transition: transform 0.2s; }
+        .post-card:hover { transform: translateY(-5px); }
+        .post-card h2 { margin-top: 0; color: var(--primary); font-size: 1.5rem; }
+        .post-card p { line-height: 1.6; color: #475569; }
+        .post-meta { font-size: 0.85rem; color: #94a3b8; display: flex; justify-content: space-between; margin-top: 1rem; border-top: 1px solid #f1f5f9; padding-top: 0.8rem; }
+        .loading { text-align: center; font-style: italic; color: #64748b; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Try-QR Blog</h1>
+    <p>Kompüter Mühəndisliyi və Kibertəhlükəsizlik qeydlərim</p>
+</header>
+
+<div class="container">
+    <div id="posts-list" class="loading">Məqalələr yüklənir...</div>
+</div>
+
+<script>
+    const API_URL = 'https://try-qr-auth.faridfatullayefh.workers.dev/posts';
+
+    async function loadPosts() {
+        const listElement = document.getElementById('posts-list');
+        
+        try {
+            const response = await fetch(API_URL);
+            if (!response.ok) throw new Error('Məlumat tapılmadı');
+            
+            const posts = await response.json();
+            
+            if (posts.length === 0) {
+                listElement.innerHTML = '<p class="loading">Hələ ki, heç bir məqalə yoxdur.</p>';
+                return;
+            }
+
+            listElement.classList.remove('loading');
+            listElement.innerHTML = posts.map(post => `
+                <article class="post-card">
+                    <h2>${post.title}</h2>
+                    <p>${post.content}</p>
+                    <div class="post-meta">
+                        <span>📅 ${new Date(post.created_at).toLocaleDateString('az-AZ')}</span>
+                        <span>🔗 /${post.slug}</span>
+                    </div>
+                </article>
+            `).join('');
+
+        } catch (error) {
+            console.error('Xəta:', error);
+            listElement.innerHTML = '<p class="loading" style="color:red">Xəta: Məlumatları çəkmək mümkün olmadı.</p>';
+        }
+    }
+
+    window.onload = loadPosts;
+</script>
+
+</body>
+</html>
