@@ -2,8 +2,9 @@ backend:
   name: github
   repo: FaridFatullayefh/try-qr-blog
   branch: main
-  auth_type: pkce 
-
+  base_url: https://try-qr-auth.faridfatullayefh.workers.dev
+  auth_endpoint: auth
+  
 display_url: https://blog.try-qr.com
 publish_mode: editorial_workflow
 
