@@ -1,10 +1,7 @@
 backend:
-  name: github
-  repo: FaridFatullayefh/try-qr-blog
-  branch: main
-  base_url: https://try-qr-auth.faridfatullayefh.workers.dev
-  auth_endpoint: auth
-  
+  name: git-gateway
+  branch: main 
+
 display_url: https://blog.try-qr.com
 publish_mode: editorial_workflow
 
