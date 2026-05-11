@@ -2,7 +2,6 @@ backend:
   name: github
   repo: FaridFatullayefh/try-qr-blog
   branch: main
-  base_url: https://api.netlify.com
 
 display_url: https://blog.try-qr.com
 publish_mode: editorial_workflow
